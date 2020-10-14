@@ -1,0 +1,91 @@
+{% load static %}
+{% load bootstrap3 %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Личный кабинет</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lucida+Console" rel="stylesheet">
+</head>
+
+<body style="font-family: 'Lucida Console', sans-serif !important; background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 100%), url(../media/full_MPLXabNm.jpg) fixed">
+<div class="container-fluid" style="background: rgba(51,100,102, 1)">
+    <h1 class="text-center text-white">Система электронного документооборота</h1>
+</div>
+
+<div class="container-fluid mt-n2" style="background: rgba(51,100,102, 0.5)">
+    <ul class="nav justify-content-between">
+        <li>
+            <div class="nav-item">
+                <button class="btn btn-link"><a class="btn-link text-uppercase" style="color: #1d2124"
+                                                href="{% url 'account' %}">Профиль</a></button>
+            </div>
+        <li>
+            <div class="nav-item">
+                <button class="btn btn-link"><a class="btn-link text-uppercase" style="color: #1d2124"
+                                                href="{% url 'docs' %}">Документы</a></button>
+            </div>
+        <li>
+            <div class="nav-item">
+                <button class="btn btn-link"><a class="btn-link text-uppercase" style="color: #1d2124"
+                                                href="{% url 'sign_out' %}">Выход</a></button>
+            </div>
+    </ul>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table table-bordered table-hover table-striped" id="table" data-toggle="table"
+                   data-pagination="true" data-locale="ru-RU"
+                   data-search="true">
+                <thead class="bg-dark text-white">
+                <tr>
+                    <th>Название</th>
+                    <th>Краткое описание</th>
+                    <th>Файл</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for d in document_form %}
+                    <tr class="table-light">
+                        <th scope="row"><a href="{% url 'docssenduser' d.id %}">{{ d.name }}</a></th>
+                        <td>{{ d.description }}</td>
+                        <td class="text-center">
+                            <div>
+                                <svg width="30" height="38" class="eape-embed-file-icon">
+                                    <path d="M3 0h18.757a3 3 0 012.122.879L29.12 6.12A3 3 0 0130 8.243V35a3 3 0 01-3 3H3a3 3 0 01-3-3V3a3 3 0 013-3zm5.264 32.777V31.23h1.28c.57 0 1.043-.098 1.419-.299.378-.202.656-.466.826-.794.165-.316.247-.658.247-1.022 0-.365-.082-.707-.247-1.023-.17-.327-.448-.592-.826-.794-.376-.2-.85-.298-1.42-.298H7.628a.63.63 0 00-.628.636v5.141c0 .172.062.326.182.446s.274.182.446.182a.63.63 0 00.636-.628zm1.204-2.77H8.264v-1.785h1.204c.513 0 .857.094 1.034.26.182.171.27.377.27.633a.823.823 0 01-.27.632c-.177.167-.52.26-1.034.26zm4.196 3.356h1.688c.684 0 1.272-.153 1.76-.463a2.981 2.981 0 001.093-1.195c.241-.483.363-.992.363-1.523 0-.532-.122-1.04-.363-1.523a2.981 2.981 0 00-1.093-1.196c-.488-.31-1.076-.463-1.76-.463h-1.688a.63.63 0 00-.628.636v5.1c0 .171.062.325.182.445s.274.182.446.182zm1.596-1.214h-.96v-3.935h.96c.42 0 .782.084 1.09.251.307.166.542.393.709.686.168.294.253.636.253 1.03 0 .395-.085.738-.253 1.032-.167.292-.402.52-.708.685-.31.167-.672.251-1.091.251zm5.572.628v-1.993h2.337a.606.606 0 00.43-.17.585.585 0 00.181-.432.598.598 0 00-.178-.433.598.598 0 00-.433-.179h-2.337v-1.356h2.631a.606.606 0 00.43-.17.585.585 0 00.181-.433.598.598 0 00-.178-.433.598.598 0 00-.433-.178h-3.267a.63.63 0 00-.628.636v5.141c0 .172.062.326.182.446s.273.182.446.182a.63.63 0 00.636-.628zm2.045-17.764c-.27-.512-.93-.763-2.013-.763-.636 0-1.418.081-2.33.243-1.272-1.323-2.592-3.254-3.53-5.153.147-.609.286-1.226.392-1.842.122-.723.269-1.55.114-2.28-.065-.293-.236-.553-.432-.772-.171-.186-.407-.446-.685-.446a3.61 3.61 0 00-.7.113c-.4.13-.611.439-.783.828-.489 1.128.18 3.043.872 4.529a45.58 45.58 0 01-2.624 7.328c-2.624 1.185-4.017 2.345-4.147 3.457-.05.406.048.998.774 1.526.195.146.431.219.668.219.603 0 1.222-.455 1.931-1.437.514-.714 1.076-1.687 1.655-2.897a33.874 33.874 0 016.12-1.923c1.091 1.03 2.077 1.558 2.917 1.558.62 0 1.149-.284 1.54-.812.4-.551.489-1.046.26-1.476zM8.469 20.847c-.326-.243-.301-.405-.301-.47.04-.382.643-1.055 2.126-1.867-1.116 2.037-1.719 2.305-1.825 2.337zm5.688-15.622c.033-.008.725.747.066 2.191-.987-.99-.14-2.166-.066-2.19zM12.723 16.15c.7-1.648 1.36-3.466 1.85-5.154.774 1.372 1.711 2.71 2.648 3.782-1.475.333-3.047.82-4.498 1.372zm8.94-.325c-.212.292-.677.3-.84.3-.366 0-.505-.219-1.076-.64.465-.057.905-.074 1.255-.074.62 0 .734.09.815.138-.008.04-.049.13-.155.276z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <a href="{{ MEDIA_URL }}{{ d.document }}" style="color: #1d2124" target="_blank"
+                                   rel="noopener noreferrer nofollow" download=""
+                                   class="jsx-3301839699 eape-embed-file-link">Скачать файл</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-ru-RU.min.js"></script>
+</html>

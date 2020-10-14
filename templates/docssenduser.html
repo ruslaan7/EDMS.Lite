@@ -1,0 +1,68 @@
+{% load static %}
+{% load bootstrap3 %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Личный кабинет</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lucida+Console" rel="stylesheet">
+</head>
+
+<body style="font-family: 'Lucida Console', sans-serif !important; background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 100%), url(../media/full_MPLXabNm.jpg) fixed">
+<div class="container-fluid" style="background: rgba(51,100,102, 1)">
+    <h1 class="text-center text-white">Система электронного документооборота</h1>
+</div>
+
+<div class="container-fluid mt-n2" style="background: rgba(51,100,102, 0.5)">
+    <ul class="nav justify-content-between">
+        <li>
+            <div class="nav-item">
+                <button class="btn btn-link"><a class="btn-link text-uppercase" style="color: #1d2124"
+                                                href="{% url 'account' %}">Профиль</a></button>
+            </div>
+        <li>
+            <div class="nav-item">
+                <button class="btn btn-link"><a class="btn-link text-uppercase" style="color: #1d2124"
+                                                href="{% url 'docs' %}">Документы</a></button>
+            </div>
+        <li>
+            <div class="nav-item">
+                <button class="btn btn-link"><a class="btn-link text-uppercase" style="color: #1d2124"
+                                                href="{% url 'sign_out' %}">Выход</a></button>
+            </div>
+    </ul>
+</div>
+
+<div class="container my-5">
+    <div class="d-flex flex-column text-center">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group"><label for="edit_course_name">Какому пользователю отправить?</label><select class="form-control"
+                                                                                                id="cr_course_teacher"
+                                                                                                type="text"
+                                                                                                placeholder="Какому пользователю отправить?"
+                                                                                                name="doc_name">
+                {% for d in user_form %}
+                    <option>{{ d.username }}</option>{% endfor %}</select></div>
+            <button class="btn btn-secondary btn-block btn-round" type="submit">Отправить</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-ru-RU.min.js"></script>
+</html>
